@@ -1,5 +1,8 @@
 package ug.mak.distributed.worker;
 
+import ug.mak.distributed.taskbag;
+import worker.Worker;
+
 public class Work {
     public Work(){}
 

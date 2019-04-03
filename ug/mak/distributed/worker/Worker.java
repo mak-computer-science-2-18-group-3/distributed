@@ -1,6 +1,8 @@
 package ug.mak.distributed.worker;
 
 import tasks.TraverseTask;
+import Work.workStub;
+import ug.mak.distributed.taskbag;
 
 public class Worker{
   // compute the task
@@ -15,9 +17,7 @@ public class Worker{
         }else{
           pair = pair;
       }
-      TraverseTask traverseTask = (TraverseTask) pair.getObject();
-
-      
+      Pair pairOut = updateWithResult();
   }
 
   public void wait(){
@@ -26,5 +26,15 @@ public class Worker{
       Thread.currentThread().sleep(2000);
     }catch(Exception ex){ex.printStackTrace();}
 
+  }
+
+  public public boolean updateWithResult(Pair pair) {
+      TraverseTask traverseTask = (TraverseTask) pair.getObject();
+      for (int i = 0; i <= traverseTask.getEnd()[0] - traverseTask.getStart()[0]; i++) {
+          for (int j = 0; j < traverseTask.getEnd()[1] - traverseTask.getStart()[1]; j++) {
+              maze.getCell(i, j).visit();
+          }
+      }
+      return true;
   }
 }
