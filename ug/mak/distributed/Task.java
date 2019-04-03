@@ -1,7 +1,10 @@
 package ug.mak.distributed;
 
+import ug.mak.distributed.maze.Maze;
+
 public class Task {
     boolean taken;
+    Maze maze;
 
     public Task(){
         taken = false;
@@ -13,5 +16,13 @@ public class Task {
 
     public boolean isNotTaken() {
         return !taken;
+    }
+
+    public Maze getMaze() {
+        return maze;
+    }
+
+    public void setMaze(Maze maze) {
+        this.maze = maze;
     }
 }
