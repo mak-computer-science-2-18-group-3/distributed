@@ -1,17 +1,23 @@
+package ug.mak.distributed.worker;
+
+import tasks.TraverseTask;
+
 public class Worker{
   // compute the task
   public Pair computeTask(Pair pair){
-      if(!(workerStub.tasks.contains(pair))){
+      if(!(workStub.tasks.contains(pair))){
           // If no matching pair
           this.wait();
-      }else if((workerStub.tasks.contains(pair)).length > 1)){
+      }else if((workStub.tasks.contains(pair)).length > 1)){
           // If several matching pairs, pick one arbitrarily
-          int index = (int) (Math.random() * workerStub.tasks.length);
-          pair = (Pair) workerStub.tasks[index];
+          int index = (int) (Math.random() * workStub.tasks.length);
+          pair = (Pair) workStub.tasks[index];
         }else{
           pair = pair;
       }
-      return result = this.traverseTask(pair);
+      TraverseTask traverseTask = (TraverseTask) pair.getObject();
+
+      
   }
 
   public void wait(){
@@ -20,9 +26,5 @@ public class Worker{
       Thread.currentThread().sleep(2000);
     }catch(Exception ex){ex.printStackTrace();}
 
-  }
-
-  public Pair traverseTask(Pair pair){
-      // Explore the maze according to task description of pair
   }
 }
