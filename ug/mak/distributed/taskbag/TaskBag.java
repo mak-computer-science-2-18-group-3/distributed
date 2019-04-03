@@ -25,6 +25,7 @@ public class TaskBag extends UnicastRemoteObject implements Master, Worker {
         }
         for (Task task : tasks) {
             if (task.isNotTaken()) {
+                task.setMaze(maze);
                 task.take();
                 return new Pair("find path", task);
             }
