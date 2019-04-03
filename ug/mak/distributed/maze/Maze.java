@@ -18,12 +18,24 @@ public class Maze {
         return maze.get(row).get(col);
     }
 
-    public void print(){
-        for (int i = 0; i < maze.size(); i++) {
-            for (int j = 0; j < maze.get(i).size(); j++) {
-                // todo
+    public void print() {
+        for (List<Cell> cells : maze) {
+            for (Cell cell : cells) {
+                System.out.print(cell.isTopOpen() ? "+  " : "+--");
             }
+            System.out.println("+");
+            for (Cell cell : cells) {
+                System.out.print(cell.isLeftOpen() ? " " : "|");
+                System.out.print(cell.isVisited() ? " X " : "   ");
+            }
+            System.out.println("|");
         }
+        List<Cell> bottomRow = maze.get(maze.size() - 1);
+
+        for (Cell cell : bottomRow) {
+            System.out.print(cell.isBottomOpen() ? "+  " : "+--");
+        }
+        System.out.println("+");
     }
 
     public static Maze buildMaze(int[][][] rawMaze){
