@@ -13,17 +13,17 @@ public class Work {
             // Looking up the registry for the remote object
             TaskBag workStub = (TaskBag) registry.lookup("taskbag");
 
+            Worker worker = new Worker(workStub);
             // pairIn()
-            Pair pairIn = (Pair) workStub.pickTask();
+            Pair pairIn = worker.pickTask();
             // Compute Task
-            Worker worker = new Worker();
             // Result of computation
-            Pair result = (Pair) worker.computeTask(pairIn);
+            worker.computeTask(pairIn);
             // Add result to taskbag
-            workStub.addTask(result);
+            // worker.addTask(result);
             // Next Task
             // If no more tasks
-            Pair nextTask = pairIn++;
+            // Pair nextTask = pairIn++;
             // add next task for next worker
 
         }catch (Exception ex){ ex.printStackTrace();}
