@@ -10,7 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskBag extends UnicastRemoteObject implements Master, Client {
+public class TaskBag extends UnicastRemoteObject implements Master, Worker{
     private Maze maze;
     private Callback masterCallback;
     private List<Task> tasks;
