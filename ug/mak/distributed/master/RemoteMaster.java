@@ -11,4 +11,6 @@ public interface RemoteMaster extends Remote {
     boolean addTask(TaskPair pair) throws RemoteException;
     Maze getMaze() throws RemoteException;
     String getAnalytics() throws RemoteException;
+
+    boolean exitFound() throws RemoteException;
 }

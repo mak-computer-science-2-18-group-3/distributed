@@ -116,8 +116,11 @@ class Work {
 
     private void endComputeWithEndCell(Cell cell, List<Cell> visitedCells) {
         endCompute(visitedCells);
-
-        // todo
+        try {
+            remoteWorker.exitFound(cell);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     private void endCompute(List<Cell> visitedCells) {

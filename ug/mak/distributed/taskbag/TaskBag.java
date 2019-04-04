@@ -17,6 +17,7 @@ import java.util.List;
 public class TaskBag extends UnicastRemoteObject implements RemoteMaster, RemoteWorker {
     private Maze maze;
     private List<Task> tasks;
+    private Cell exit;
 
     TaskBag() throws RemoteException {
         super();
@@ -62,6 +63,12 @@ public class TaskBag extends UnicastRemoteObject implements RemoteMaster, Remote
     }
 
     @Override
+    public void exitFound(Cell cell) {
+        exit = cell;
+        tasks.clear();
+    }
+
+    @Override
     public Maze getMaze() {
         return maze;
     }
@@ -75,5 +82,10 @@ public class TaskBag extends UnicastRemoteObject implements RemoteMaster, Remote
             }
         }
         return "Remaining tasks: " + remainingTasks + "\n";
+    }
+
+    @Override
+    public boolean exitFound() throws RemoteException {
+        return exit != null;
     }
 }

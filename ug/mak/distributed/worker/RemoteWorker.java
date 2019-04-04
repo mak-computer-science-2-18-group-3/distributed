@@ -1,5 +1,6 @@
 package ug.mak.distributed.worker;
 
+import ug.mak.distributed.maze.Cell;
 import ug.mak.distributed.pairs.TaskPair;
 import ug.mak.distributed.pairs.TraverseTaskPair;
 
@@ -10,4 +11,6 @@ public interface RemoteWorker extends Remote {
     TaskPair pickTask() throws RemoteException;
     boolean updateWithResult(TraverseTaskPair pair) throws RemoteException;
     boolean addTask(TaskPair pair) throws RemoteException;
+
+    void exitFound(Cell cell) throws RemoteException;
 }

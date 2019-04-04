@@ -17,7 +17,7 @@ public class Main {
             // Looking up the registry for the remote object
             RemoteMaster masterStub = (RemoteMaster) registry.lookup("taskbag");
             // Calling remote methods on the obtained object
-            Maze maze = Maze.buildMaze(RawMazes.maze1);
+            Maze maze = Maze.buildMaze(RawMazes.maze2);
             // Set-up maze
             masterStub.setupMaze(maze);
             // Add ug.mak.distributed.tasks to the TaskBag
@@ -25,18 +25,27 @@ public class Main {
 
             while (true){
                 pause();
+                clearScreen();
                 masterStub.getMaze().print();
                 System.out.println(masterStub.getAnalytics());
+                if(masterStub.exitFound()){
+                    break;
+                }
             }
         }catch (Exception ex){ ex.printStackTrace();}
     }
 
     private static void pause() {
-        // wait for 2 seconds
+        // wait for a second
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }
