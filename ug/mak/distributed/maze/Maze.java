@@ -15,7 +15,11 @@ public class Maze {
     }
 
     public Cell getCell(int row, int col){
-        return maze.get(row).get(col);
+        try {
+          return maze.get(row).get(col);
+        }catch (Exception e) {
+          return null;
+        }
     }
 
     public void print() {
@@ -40,10 +44,11 @@ public class Maze {
 
     public static Maze buildMaze(int[][][] rawMaze){
         Maze maze = new Maze();
-        for (int[][] ints : rawMaze) {
+        for (int i = 0; i < rawMaze.length; i++) {
             List<Cell> row = new ArrayList<>();
-            for (int[] cell : ints) {
-                row.add(new Cell(cell[0], cell[1], cell[2], cell[3]));
+            for (int j = 0; j < rawMaze[i].length; j++) {
+              cell = rawMaze[i][j];
+                row.add(new Cell(cell[0], cell[1], cell[2], cell[3], i, j));
             }
             maze.addRow(row);
         }

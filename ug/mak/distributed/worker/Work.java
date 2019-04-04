@@ -18,14 +18,11 @@ public class Work {
             Pair pairIn = worker.pickTask();
             // Compute Task
             // Result of computation
-            worker.computeTask(pairIn);
-            // Add result to taskbag
-            // worker.addTask(result);
-            // Next Task
-            // If no more tasks
-            // Pair nextTask = pairIn++;
-            // add next task for next worker
-
+            Pair result = worker.computeTask(pairIn);
+            // Update
+            if (worker.updateWithResult(result)) {
+                return result;
+            }
         }catch (Exception ex){ ex.printStackTrace();}
     }
 }

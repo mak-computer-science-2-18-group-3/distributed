@@ -5,8 +5,10 @@ import ug.mak.distributed.maze.Maze;
 public class Task {
     boolean taken;
     Maze maze;
+    public int[] start;
 
-    public Task(){
+    public Task(int[] start){
+        this.start = start;
         taken = false;
     }
 

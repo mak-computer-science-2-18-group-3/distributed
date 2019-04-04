@@ -6,13 +6,17 @@ public class Cell {
     private boolean bottomOpen;
     private boolean leftOpen;
     private boolean visited;
+    public int row;
+    public int col;
 
-    public Cell(boolean topOpen, boolean rightOpen, boolean bottomOpen, boolean leftOpen){
+    public Cell(boolean topOpen, boolean rightOpen, boolean bottomOpen, boolean leftOpen, int row, int col){
         this.topOpen = topOpen;
         this.rightOpen = rightOpen;
         this.bottomOpen = bottomOpen;
         this.leftOpen = leftOpen;
         visited = false;
+        this.row = row;
+        this.col = col;
     }
 
     public Cell(int topOpen, int rightOpen, int bottomOpen, int leftOpen){
