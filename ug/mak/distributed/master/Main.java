@@ -26,22 +26,28 @@ public class Main {
             // Add ug.mak.distributed.tasks to the TaskBag
             masterStub.addTask(new TaskPair(Constants.ADD_TASK, new Task(maze.getCell(0, 0))));
 
+            // start Master task to monitor the maze progress
             while (true){
                 pause();
                 clearScreen();
                 Maze currentMaze = masterStub.getMaze();
+
+                // print current state of the maze and the number of running tasks
                 currentMaze.print();
                 System.out.println(masterStub.getAnalytics());
 
+                // Checking the health state of worker
                 ArrayList<Task> tasks = masterStub.getCurrentTasks();
                 ArrayList<Task> toBeRestarted = new ArrayList<>();
                 for (Task task : tasks) {
                     Cell cell = currentMaze.getCell(task.getStart().row, task.getStart().col);
                     if (task.isTaken() && !cell.isVisited()){
-                        System.out.println("Task with id: " + task.getId() + " up for more than 5 seconds...");
-                        System.out.println("Resetting task...");
                         LocalTime time = LocalTime.now();
+
+                        // If worker is irrespondent for 5 seconds, we re-allocate their task to another worker
                         if (time.minusSeconds(5).isAfter(task.getTimeTaken())){
+                            System.out.println("Task with id: " + task.getId() + " up for more than 5 seconds...");
+                            System.out.println("Resetting task...");
                             toBeRestarted.add(task);
                         }
                     }
