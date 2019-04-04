@@ -32,7 +32,10 @@ public class Main {
                 // Result of computation
                 worker.computeTask(pairIn);
             }
-        }catch (Exception ex){ ex.printStackTrace();}
+        }catch (Exception ex){
+//            ex.printStackTrace();
+            System.out.println("Failed to start Worker");
+        }
     }
 
     private static void pause() {

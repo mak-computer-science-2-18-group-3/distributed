@@ -28,7 +28,8 @@ public class Main {
             System.out.println("Done.");
 
         } catch (RemoteException | AlreadyBoundException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("Failed to start TaskBag");
         }
     }
 

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class TaskBag extends UnicastRemoteObject implements RemoteMaster, RemoteWorker {
     private Maze maze;
-    private List<Task> tasks;
+    private ArrayList<Task> tasks;
     private Cell exit;
 
     TaskBag() throws RemoteException {
@@ -60,6 +60,7 @@ public class TaskBag extends UnicastRemoteObject implements RemoteMaster, Remote
     @Override
     public synchronized boolean addTask(TaskPair pair) {
         Task task = pair.getTask();
+        task.setId(tasks.size());
         this.tasks.add(task);
         return true;
     }
@@ -89,5 +90,17 @@ public class TaskBag extends UnicastRemoteObject implements RemoteMaster, Remote
     @Override
     public boolean exitFound() {
         return exit != null;
+    }
+
+    @Override
+    public ArrayList<Task> getCurrentTasks(){
+        return tasks;
+    }
+
+    @Override
+    public void restart(ArrayList<Task> toBeRestarted){
+        for (Task task : toBeRestarted) {
+            tasks.get(task.getId()).reset();
+        }
     }
 }
