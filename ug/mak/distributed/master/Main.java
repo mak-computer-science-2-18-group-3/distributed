@@ -20,7 +20,7 @@ public class Main {
             // Looking up the registry for the remote object
             RemoteMaster masterStub = (RemoteMaster) registry.lookup("taskbag");
             // Calling remote methods on the obtained object
-            Maze maze = Maze.buildMaze(RawMazes.maze1);
+            Maze maze = Maze.buildMaze(RawMazes.maze3);
             // Set-up maze
             masterStub.init(maze);
             // Add ug.mak.distributed.tasks to the TaskBag
