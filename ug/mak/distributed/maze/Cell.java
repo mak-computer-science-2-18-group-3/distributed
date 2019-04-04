@@ -1,6 +1,8 @@
 package ug.mak.distributed.maze;
 
-public class Cell {
+import java.io.Serializable;
+
+public class Cell implements Serializable {
     private boolean topOpen;
     private boolean rightOpen;
     private boolean bottomOpen;

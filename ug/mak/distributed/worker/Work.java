@@ -1,9 +1,10 @@
 package ug.mak.distributed.worker;
 
+import ug.mak.distributed.pairs.TaskPair;
+import ug.mak.distributed.pairs.TraverseTaskPair;
 import ug.mak.distributed.tasks.TraverseTask;
 import ug.mak.distributed.Constants;
-import ug.mak.distributed.Pair;
-import ug.mak.distributed.Task;
+import ug.mak.distributed.tasks.Task;
 import ug.mak.distributed.maze.Cell;
 import ug.mak.distributed.maze.Maze;
 
@@ -20,8 +21,8 @@ class Work {
     }
 
     // compute the task
-    void computeTask(Pair pair) {
-        Task task = (Task) pair.getObject();
+    void computeTask(TaskPair pair) {
+        Task task = (Task) pair.getTask();
         Maze maze = task.getMaze();
         Cell cell = task.getStart();
 
@@ -107,7 +108,7 @@ class Work {
     }
 
     private void endCompute(List<Cell> visitedCells) {
-        Pair pairOut = new Pair(Constants.TRAVERSE_TASK, new TraverseTask(visitedCells));
+        TraverseTaskPair pairOut = new TraverseTaskPair(Constants.TRAVERSE_TASK, new TraverseTask(visitedCells));
         try {
             remoteWorker.updateWithResult(pairOut);
         } catch (RemoteException e) {
@@ -118,7 +119,7 @@ class Work {
     private void endComputeWithNextTasks(List<Cell> nextTaskCells, List<Cell> visitedCells) {
         endCompute(visitedCells);
         for (Cell nextTaskCell : nextTaskCells) {
-            Pair pairOut = new Pair(Constants.ADD_TASK, new Task(nextTaskCell));
+            TaskPair pairOut = new TaskPair(Constants.ADD_TASK, new Task(nextTaskCell));
             try {
                 remoteWorker.addTask(pairOut);
             } catch (RemoteException e) {

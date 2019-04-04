@@ -1,8 +1,8 @@
 package ug.mak.distributed.master;
 
 import ug.mak.distributed.Constants;
-import ug.mak.distributed.Pair;
-import ug.mak.distributed.Task;
+import ug.mak.distributed.pairs.TaskPair;
+import ug.mak.distributed.tasks.Task;
 import ug.mak.distributed.maze.Maze;
 import ug.mak.distributed.maze.RawMazes;
 
@@ -21,7 +21,7 @@ public class Main {
             // Set-up maze
             masterStub.setupMaze(maze);
             // Add ug.mak.distributed.tasks to the TaskBag
-            masterStub.addTask(new Pair(Constants.ADD_TASK, new Task(maze.getCell(0, 0))));
+            masterStub.addTask(new TaskPair(Constants.ADD_TASK, new Task(maze.getCell(0, 0))));
 
             while (true){
                 pause();

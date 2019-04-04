@@ -1,8 +1,9 @@
 package ug.mak.distributed.taskbag;
 
+import ug.mak.distributed.pairs.TaskPair;
+import ug.mak.distributed.pairs.TraverseTaskPair;
 import ug.mak.distributed.tasks.TraverseTask;
-import ug.mak.distributed.Pair;
-import ug.mak.distributed.Task;
+import ug.mak.distributed.tasks.Task;
 import ug.mak.distributed.master.RemoteMaster;
 import ug.mak.distributed.maze.Cell;
 import ug.mak.distributed.maze.Maze;
@@ -23,7 +24,7 @@ public class TaskBag extends UnicastRemoteObject implements RemoteMaster, Remote
     }
 
     @Override
-    public Pair pickTask() {
+    public TaskPair pickTask() {
         if (maze == null || tasks.size() < 1){
             return null;
         }
@@ -31,15 +32,15 @@ public class TaskBag extends UnicastRemoteObject implements RemoteMaster, Remote
             if (task.isNotTaken()) {
                 task.setMaze(maze);
                 task.take();
-                return new Pair("find path", task);
+                return new TaskPair("find path", task);
             }
         }
         return null;
     }
 
     @Override
-    public boolean updateWithResult(Pair pair) {
-        TraverseTask traverseTask = (TraverseTask) pair.getObject();
+    public boolean updateWithResult(TraverseTaskPair pair) {
+        TraverseTask traverseTask = pair.getTraverseTask();
         List<Cell> visitedCells = traverseTask.getVisitedCells();
         for (Cell cell : visitedCells) {
             maze.getCell(cell.row, cell.col).visit();
@@ -54,8 +55,8 @@ public class TaskBag extends UnicastRemoteObject implements RemoteMaster, Remote
     }
 
     @Override
-    public boolean addTask(Pair pair) {
-        Task task = (Task) pair.getObject();
+    public boolean addTask(TaskPair pair) {
+        Task task = pair.getTask();
         this.tasks.add(task);
         return true;
     }

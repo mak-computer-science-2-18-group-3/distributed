@@ -1,10 +1,11 @@
 package ug.mak.distributed.maze;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Maze {
-    private List<List<Cell>> maze;
+public class Maze implements Serializable {
+    private ArrayList<List<Cell>> maze;
 
     private Maze(){
         maze = new ArrayList<>();

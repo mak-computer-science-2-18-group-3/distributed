@@ -1,9 +1,11 @@
-package ug.mak.distributed;
+package ug.mak.distributed.tasks;
 
 import ug.mak.distributed.maze.Cell;
 import ug.mak.distributed.maze.Maze;
 
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
     boolean taken;
     Maze maze;
     private Cell start;

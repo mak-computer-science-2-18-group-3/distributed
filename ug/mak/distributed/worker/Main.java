@@ -1,6 +1,7 @@
 package ug.mak.distributed.worker;
 
-import ug.mak.distributed.Pair;
+
+import ug.mak.distributed.pairs.TaskPair;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -15,7 +16,7 @@ public class Main {
 
             Work worker = new Work(remoteWorker);
             // pairIn()
-            Pair pairIn = remoteWorker.pickTask();
+            TaskPair pairIn = remoteWorker.pickTask();
             // Compute Task
             // Result of computation
             worker.computeTask(pairIn);
