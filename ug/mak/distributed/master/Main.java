@@ -19,7 +19,7 @@ public class Main {
             // Calling remote methods on the obtained object
             Maze maze = Maze.buildMaze(RawMazes.maze2);
             // Set-up maze
-            masterStub.setupMaze(maze);
+            masterStub.init(maze);
             // Add ug.mak.distributed.tasks to the TaskBag
             masterStub.addTask(new TaskPair(Constants.ADD_TASK, new Task(maze.getCell(0, 0))));
 

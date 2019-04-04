@@ -22,6 +22,7 @@ public class Main {
                 TaskPair pairIn = remoteWorker.pickTask();
 
                 if (pairIn == null){
+                    System.out.println("No task found. Waiting...");
                     continue;
                 }
                 // Compute Task

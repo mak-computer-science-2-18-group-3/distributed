@@ -50,7 +50,9 @@ public class TaskBag extends UnicastRemoteObject implements RemoteMaster, Remote
     }
 
     @Override
-    public boolean setupMaze(Maze maze) {
+    public boolean init(Maze maze) {
+        this.tasks.clear();
+        exit = null;
         this.maze = maze;
         return true;
     }
