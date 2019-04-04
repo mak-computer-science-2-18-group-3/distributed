@@ -7,6 +7,7 @@ import java.rmi.registry.Registry;
 
 public class Main {
     public static void main(String[] args) {
+        clearScreen();
         // task bag
         TaskBag taskBag;
         try {
@@ -17,7 +18,8 @@ public class Main {
 
             // create socket
             System.out.println("Setting up port...");
-            Registry registry = LocateRegistry.getRegistry();
+            System.setProperty("java.rmi.server.hostname","localhost");
+            Registry registry = LocateRegistry.createRegistry(1048);
             System.out.println("Done.");
 
             // bind to it
@@ -28,5 +30,10 @@ public class Main {
         } catch (RemoteException | AlreadyBoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

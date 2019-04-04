@@ -25,7 +25,7 @@ public class TaskBag extends UnicastRemoteObject implements RemoteMaster, Remote
     }
 
     @Override
-    public TaskPair pickTask() {
+    public synchronized TaskPair pickTask() {
         if (maze == null || tasks.size() < 1){
             return null;
         }
@@ -40,7 +40,7 @@ public class TaskBag extends UnicastRemoteObject implements RemoteMaster, Remote
     }
 
     @Override
-    public boolean updateWithResult(TraverseTaskPair pair) {
+    public synchronized boolean updateWithResult(TraverseTaskPair pair) {
         TraverseTask traverseTask = pair.getTraverseTask();
         List<Cell> visitedCells = traverseTask.getVisitedCells();
         for (Cell cell : visitedCells) {
@@ -58,14 +58,14 @@ public class TaskBag extends UnicastRemoteObject implements RemoteMaster, Remote
     }
 
     @Override
-    public boolean addTask(TaskPair pair) {
+    public synchronized boolean addTask(TaskPair pair) {
         Task task = pair.getTask();
         this.tasks.add(task);
         return true;
     }
 
     @Override
-    public void exitFound(Cell cell) {
+    public synchronized void exitFound(Cell cell) {
         exit = cell;
         tasks.clear();
     }
@@ -87,7 +87,7 @@ public class TaskBag extends UnicastRemoteObject implements RemoteMaster, Remote
     }
 
     @Override
-    public boolean exitFound() throws RemoteException {
+    public boolean exitFound() {
         return exit != null;
     }
 }

@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args){
         try{
             // Getting the Registry
-            Registry registry = LocateRegistry.getRegistry(null);
+            Registry registry = LocateRegistry.getRegistry("localhost", 1048);
             // Looking up the registry for the remote object
             RemoteMaster masterStub = (RemoteMaster) registry.lookup("taskbag");
             // Calling remote methods on the obtained object
@@ -44,7 +44,7 @@ public class Main {
         }
     }
 
-    public static void clearScreen() {
+    private static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }

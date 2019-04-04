@@ -8,15 +8,18 @@ import java.rmi.registry.Registry;
 
 public class Main {
     public static void main(String[] args){
+        clearScreen();
         try{
             // Getting the Registry
-            Registry registry = LocateRegistry.getRegistry(null);
+            Registry registry = LocateRegistry.getRegistry("localhost", 1048);
             // Looking up the registry for the remote object
             RemoteWorker remoteWorker = (RemoteWorker) registry.lookup("taskbag");
 
             Work worker = new Work(remoteWorker);
 
             while(true){
+                System.out.println();
+                System.out.println();
                 pause();
                 // pairIn()
                 TaskPair pairIn = remoteWorker.pickTask();
@@ -39,5 +42,10 @@ public class Main {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }
