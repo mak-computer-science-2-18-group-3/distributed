@@ -1,4 +1,4 @@
-package tasks;
+package ug.mak.distributed.tasks;
 
 import ug.mak.distributed.maze.Cell;
 

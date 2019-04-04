@@ -20,7 +20,7 @@ public class Main {
             Maze maze = Maze.buildMaze(RawMazes.maze1);
             // Set-up maze
             masterStub.setupMaze(maze);
-            // Add tasks to the TaskBag
+            // Add ug.mak.distributed.tasks to the TaskBag
             masterStub.addTask(new Pair(Constants.ADD_TASK, new Task(maze.getCell(0, 0))));
 
             while (true){

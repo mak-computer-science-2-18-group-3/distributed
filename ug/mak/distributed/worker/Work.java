@@ -1,6 +1,6 @@
 package ug.mak.distributed.worker;
 
-import tasks.TraverseTask;
+import ug.mak.distributed.tasks.TraverseTask;
 import ug.mak.distributed.Constants;
 import ug.mak.distributed.Pair;
 import ug.mak.distributed.Task;

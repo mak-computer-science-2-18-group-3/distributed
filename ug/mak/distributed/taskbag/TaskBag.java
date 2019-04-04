@@ -1,6 +1,6 @@
 package ug.mak.distributed.taskbag;
 
-import tasks.TraverseTask;
+import ug.mak.distributed.tasks.TraverseTask;
 import ug.mak.distributed.Pair;
 import ug.mak.distributed.Task;
 import ug.mak.distributed.master.RemoteMaster;
