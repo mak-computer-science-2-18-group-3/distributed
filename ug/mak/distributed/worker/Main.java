@@ -15,18 +15,26 @@ public class Main {
             RemoteWorker remoteWorker = (RemoteWorker) registry.lookup("taskbag");
 
             Work worker = new Work(remoteWorker);
-            // pairIn()
-            TaskPair pairIn = remoteWorker.pickTask();
-            // Compute Task
-            // Result of computation
-            worker.computeTask(pairIn);
+
+            while(true){
+                pause();
+                // pairIn()
+                TaskPair pairIn = remoteWorker.pickTask();
+
+                if (pairIn == null){
+                    continue;
+                }
+                // Compute Task
+                // Result of computation
+                worker.computeTask(pairIn);
+            }
         }catch (Exception ex){ ex.printStackTrace();}
     }
 
-    public static void pause() {
-        // wait for 2 seconds
+    private static void pause() {
+        // wait for half a second
         try {
-            Thread.sleep(2000);
+            Thread.sleep(500);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

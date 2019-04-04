@@ -65,4 +65,15 @@ public class TaskBag extends UnicastRemoteObject implements RemoteMaster, Remote
     public Maze getMaze() {
         return maze;
     }
+
+    @Override
+    public String getAnalytics() {
+        int remainingTasks = 0;
+        for (Task task : tasks) {
+            if (task.isNotTaken()) {
+                remainingTasks++;
+            }
+        }
+        return "Remaining tasks: " + remainingTasks + "\n";
+    }
 }

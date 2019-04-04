@@ -26,6 +26,7 @@ public class Main {
             while (true){
                 pause();
                 masterStub.getMaze().print();
+                System.out.println(masterStub.getAnalytics());
             }
         }catch (Exception ex){ ex.printStackTrace();}
     }

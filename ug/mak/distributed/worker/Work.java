@@ -22,20 +22,20 @@ class Work {
 
     // compute the task
     void computeTask(TaskPair pair) {
-        Task task = (Task) pair.getTask();
+        Task task = pair.getTask();
         Maze maze = task.getMaze();
         Cell cell = task.getStart();
-
-        Cell topCell, leftCell, bottomCell, rightCell;
-
-        topCell = maze.getCell(cell.row - 1, cell.col);
-        rightCell = maze.getCell(cell.row, cell.col + 1);
-        bottomCell = maze.getCell(cell.row + 1, cell.col);
-        leftCell = maze.getCell(cell.row, cell.col - 1);
 
         List<Cell> visitedCells = new ArrayList<>();
 
         while (cell != null && !cell.isVisited()) {
+
+            Cell topCell, leftCell, bottomCell, rightCell;
+
+            topCell = maze.getCell(cell.row - 1, cell.col);
+            rightCell = maze.getCell(cell.row, cell.col + 1);
+            bottomCell = maze.getCell(cell.row + 1, cell.col);
+            leftCell = maze.getCell(cell.row, cell.col - 1);
 
             String direction = "";
             int possibleDirections = 0;
@@ -47,33 +47,46 @@ class Work {
                 possibleDirections++;
                 nextTaskCells.add(topCell);
                 direction = "TOP";
-            } else if (cell.isRightOpen() && rightCell != null && !rightCell.isVisited()) {
+                System.out.println("Going " + direction + " is an option.");
+            }
+            if (cell.isRightOpen() && rightCell != null && !rightCell.isVisited()) {
                 possibleDirections++;
                 nextTaskCells.add(rightCell);
                 direction = "RIGHT";
-            } else if (cell.isBottomOpen() && bottomCell != null && !bottomCell.isVisited()) {
+                System.out.println("Going " + direction + " is an option.");
+            }
+            if (cell.isBottomOpen() && bottomCell != null && !bottomCell.isVisited()) {
                 possibleDirections++;
                 nextTaskCells.add(bottomCell);
                 direction = "BOTTOM";
-            } else if (cell.isLeftOpen() && leftCell != null && !leftCell.isVisited()) {
+                System.out.println("Going " + direction + " is an option.");
+            }
+            if (cell.isLeftOpen() && leftCell != null && !leftCell.isVisited()) {
                 possibleDirections++;
                 nextTaskCells.add(leftCell);
                 direction = "LEFT";
+                System.out.println("Going " + direction + " is an option.");
             }
 
             cell.visit();
             visitedCells.add(cell);
 
+            System.out.println(possibleDirections + " possible directions found.");
+
             if (possibleDirections > 1) {
+                System.out.println("Adding them to the task bag...");
                 endComputeWithNextTasks(nextTaskCells, visitedCells);
                 return;
             } else if (possibleDirections < 1) {
                 // dead end, probably end
+                System.out.println("No where to go. Finishing.");
                 endCompute(visitedCells);
                 return;
             } else if (maze.isEndCell(cell)) {
+                System.out.println("Found end cell. Finishing.");
                 endComputeWithEndCell(cell, visitedCells);
             } else {
+                System.out.println("Going " + direction + "...");
                 int row = cell.row;
                 int col = cell.col;
                 switch (direction) {
@@ -81,7 +94,7 @@ class Work {
                         row = cell.row - 1;
                         break;
                     }
-                    case "DOWN": {
+                    case "BOTTOM": {
                         row = cell.row + 1;
                         break;
                     }
