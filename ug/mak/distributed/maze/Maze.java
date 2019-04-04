@@ -14,6 +14,10 @@ public class Maze {
         maze.add(cells);
     }
 
+    public boolean isEndCell(Cell cell){
+        return cell.row == maze.size() -1 && cell.col == maze.get(0).size() - 1;
+    }
+
     public Cell getCell(int row, int col){
         try {
           return maze.get(row).get(col);
@@ -25,7 +29,7 @@ public class Maze {
     public void print() {
         for (List<Cell> cells : maze) {
             for (Cell cell : cells) {
-                System.out.print(cell.isTopOpen() ? "+  " : "+--");
+                System.out.print(cell.isTopOpen() ? "+   " : "+---");
             }
             System.out.println("+");
             for (Cell cell : cells) {
@@ -37,7 +41,7 @@ public class Maze {
         List<Cell> bottomRow = maze.get(maze.size() - 1);
 
         for (Cell cell : bottomRow) {
-            System.out.print(cell.isBottomOpen() ? "+  " : "+--");
+            System.out.print(cell.isBottomOpen() ? "+   " : "+---");
         }
         System.out.println("+");
     }
@@ -47,7 +51,7 @@ public class Maze {
         for (int i = 0; i < rawMaze.length; i++) {
             List<Cell> row = new ArrayList<>();
             for (int j = 0; j < rawMaze[i].length; j++) {
-              cell = rawMaze[i][j];
+              int[] cell = rawMaze[i][j];
                 row.add(new Cell(cell[0], cell[1], cell[2], cell[3], i, j));
             }
             maze.addRow(row);

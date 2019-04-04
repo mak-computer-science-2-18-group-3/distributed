@@ -1,14 +1,11 @@
 package ug.mak.distributed.taskbag;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
+import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 public class Main {
-
-    private static final int MASTER_PORT = 2000;
-
     public static void main(String[] args) {
         // task bag
         TaskBag taskBag = null;
@@ -20,14 +17,15 @@ public class Main {
 
             // create socket
             System.out.println("Setting up port...");
-            LocateRegistry.createRegistry(MASTER_PORT);
+            Registry registry = LocateRegistry.getRegistry();
             System.out.println("Done.");
 
             // bind to it
             System.out.println("Binding...");
-            Naming.rebind("rmi://localhost:" + MASTER_PORT + "/taskbag", taskBag);
+            registry.bind("taskbag", taskBag);
             System.out.println("Done.");
-        } catch (RemoteException | MalformedURLException e) {
+
+        } catch (RemoteException | AlreadyBoundException e) {
             e.printStackTrace();
         }
     }

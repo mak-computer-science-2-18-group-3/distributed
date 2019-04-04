@@ -1,19 +1,17 @@
 package tasks;
 
+import ug.mak.distributed.maze.Cell;
+
+import java.util.List;
+
 public class TraverseTask {
-    private int[] start;
-    private int[] end;
+    private List<Cell> visitedCells;
 
-    public TraverseTask(int[] start, int[] end){
-        this.start = start;
-        this.end = end;
+    public TraverseTask(List<Cell> visitedCells){
+        this.visitedCells = visitedCells;
     }
 
-    public int[] getStart() {
-        return start;
-    }
-
-    public int[] getEnd() {
-        return end;
+    public List<Cell> getVisitedCells() {
+        return visitedCells;
     }
 }

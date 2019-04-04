@@ -19,11 +19,14 @@ public class Cell {
         this.col = col;
     }
 
-    public Cell(int topOpen, int rightOpen, int bottomOpen, int leftOpen){
+    public Cell(int topOpen, int rightOpen, int bottomOpen, int leftOpen, int row, int col){
         this.topOpen = topOpen == 0;
         this.rightOpen = rightOpen == 0;
         this.bottomOpen = bottomOpen == 0;
         this.leftOpen = leftOpen == 0;
+        visited = false;
+        this.row = row;
+        this.col = col;
     }
 
     public void visit(){

@@ -1,13 +1,14 @@
 package ug.mak.distributed;
 
+import ug.mak.distributed.maze.Cell;
 import ug.mak.distributed.maze.Maze;
 
 public class Task {
     boolean taken;
     Maze maze;
-    public int[] start;
+    private Cell start;
 
-    public Task(int[] start){
+    public Task(Cell start){
         this.start = start;
         taken = false;
     }
@@ -26,5 +27,9 @@ public class Task {
 
     public void setMaze(Maze maze) {
         this.maze = maze;
+    }
+
+    public Cell getStart() {
+        return start;
     }
 }
